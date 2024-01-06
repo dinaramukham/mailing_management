@@ -24,6 +24,7 @@ class MailingCreateView(CreateView):
     fields=['client', 'log', 'letter', 'date_from', 'date_to', 'period', 'status']
     success_url = reverse_lazy('mailing_list')
 
+
 class MailingDeleteView(DeleteView):
     model=Mailing
     success_url = reverse_lazy('mailing_list')

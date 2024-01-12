@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mailing'
+
+    'mailing',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'mailing_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME':   BASE_DIR / 'db.sqlite3', #'mailing_management',
     }
 }
 
@@ -139,9 +141,12 @@ EMAIL_USE_SSL=True
 EMAIL_HOST_USER='dinara.muhametzianowa@yandex.ru'
 EMAIL_HOST_PASSWORD=os.getenv('EMAIL_PASSWORD')
 
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-SERVER_EMAIL = EMAIL_HOST_USER
-EMAIL_ADMIN = EMAIL_HOST_USER
+AUTH_USER_MODEL='users.User'
+LOGIN_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL='/'
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+#SERVER_EMAIL = EMAIL_HOST_USER
+#EMAIL_ADMIN = EMAIL_HOST_USER
 
 
 #EMAIL_USE_TSL=False

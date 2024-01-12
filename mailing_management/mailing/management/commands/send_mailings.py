@@ -15,6 +15,10 @@ class Command(BaseCommand):
             if mailing.date_from<now_date<mailing.date_to:
                 mailing.status="start"
                 mailing.save()
+            if mailing.date_to<now_date<mailing.date_from:
+                mailing.log.datetime_attempt=datetime.now()
+                mailing.log.status_attempt = True
+                mailing.save()
         mailings=Mailing.objects.filter(status="start")
         for mailing in mailings:
             recipient_list=mailing.client.all()
@@ -22,5 +26,5 @@ class Command(BaseCommand):
                 subject= f'{mailing.letter.title}',
                 message=f'{mailing.letter.content}',
                 from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[recipient_list]
+                recipient_list=recipient_list,
             )

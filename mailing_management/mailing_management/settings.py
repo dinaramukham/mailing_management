@@ -134,7 +134,7 @@ STATICFILES_DIRS=[
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRONJOBS=[
-    ('* * * * *', 'mailing.cron.example')  #'python manage.py send_mailings'
+    ('0 4 * * *', 'python manage.py send_mailings')  # 'mailing.cron.example'
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

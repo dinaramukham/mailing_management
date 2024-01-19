@@ -180,10 +180,12 @@
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'exzample' %}">эксперимент</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'mailing_create' %}">Добавить рассылку</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'mailing_list' %}">Рассылки</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'client_create' %}">Добавить клиента</a>
-        <a class="py-2 link-body-emphasis text-decoration-none" href="{% url 'client_list' %}">Клиенты</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'registration' %}">Регистрация</a>
+        {% if user.is_authenticated %}
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">Войти</a>
+        {% else %}
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'logout' %}">Выйти</a>
+        {% endif %}
       </nav>
     </div>
 
@@ -209,15 +211,15 @@
       <div class="col-6 col-md">
         <h5>Клиенты</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">просмотр</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">создать</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'client_list' %}">просмотр</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'client_create' %}">создать</a></li>
         </ul>
       </div>
       <div class="col-6 col-md">
         <h5>Рассылки</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">просмотр</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">создать</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'mailing_list' %}">просмотр</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'mailing_create' %}">создать</a></li>
         </ul>
       </div>
     </div>

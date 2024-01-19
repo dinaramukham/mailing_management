@@ -1,6 +1,8 @@
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
+from django.http import Http404
 from django.shortcuts import render
 from django.urls import  reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -16,41 +18,61 @@ class MailingListView(ListView):
 
 class MailingDetailView(DetailView):
     model= Mailing
-class MailingUpdateView(UpdateView):
+
+class MailingUpdateView(LoginRequiredMixin, UpdateView):
     model=Mailing
     #fields=['client', 'log', 'letter', 'date_from', 'date_to', 'period', 'status']
     form_class = MailingForm
     success_url = reverse_lazy('mailing_list')
-class MailingCreateView(CreateView):
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.object.user != self.request.user:
+            raise Http404
+        return self.object
+class MailingCreateView(LoginRequiredMixin, CreateView):
     model=Mailing
     form_class = MailingForm
     #fields=['client', 'log', 'letter', 'date_from', 'date_to', 'period', 'status']
     success_url = reverse_lazy('mailing_list')
 
 
-class MailingDeleteView(DeleteView):
+class MailingDeleteView(LoginRequiredMixin, DeleteView):
     model=Mailing
     success_url = reverse_lazy('mailing_list')
-
-class LetterCreateView(CreateView):
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.object.user != self.request.user:
+            raise Http404
+        return self.object
+class LetterCreateView(LoginRequiredMixin, CreateView):
     model=Letter
     fields=['title','content']
     success_url = reverse_lazy('mailing_create')
-class ClientCreateView(CreateView):
+class ClientCreateView(LoginRequiredMixin, CreateView):
     model =Client
     #fields = ['name', 'email', 'message']
     form_class = ClientForm
     success_url = reverse_lazy('mailing_list')
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
     model=Client
     #fields=['name', 'email', 'message']
     form_class = ClientForm
     success_url = reverse_lazy('mailing_list')
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.object.user != self.request.user:
+            raise Http404
+        return self.object
 
-class ClientListView(ListView):
+
+
+
+
+class ClientListView( ListView):
     model = Client
-class ClientDetailView(DetailView):
+
+class ClientDetailView(LoginRequiredMixin, DetailView):
     model=Client
 
 

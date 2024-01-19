@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'mailing_management.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':   BASE_DIR / 'db.sqlite3', #'mailing_management',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':   'mailing_management', #BASE_DIR / 'db.sqlite3', ,
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
+
     }
 }
 
@@ -130,7 +134,7 @@ STATICFILES_DIRS=[
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRONJOBS=[
-    ('* * * * *', 'python manage.py send_mailings')
+    ('* * * * *', 'mailing.cron.example')  #'python manage.py send_mailings'
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -142,8 +146,11 @@ EMAIL_HOST_USER='dinara.muhametzianowa@yandex.ru'
 EMAIL_HOST_PASSWORD=os.getenv('EMAIL_PASSWORD')
 
 AUTH_USER_MODEL='users.User'
+
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/'
+LOGIN_URL='registration/'
+
 #DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 #SERVER_EMAIL = EMAIL_HOST_USER
 #EMAIL_ADMIN = EMAIL_HOST_USER

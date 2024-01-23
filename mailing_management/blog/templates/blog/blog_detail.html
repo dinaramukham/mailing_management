@@ -1,0 +1,15 @@
+{% extends "mailing/base.html" %}
+{% block content %}
+  <div class="container my-5">
+    <div class="bg-body-tertiary p-5 rounded">
+      <div class="col-sm-8 py-5 mx-auto">
+        <h1 class="display-5 fw-normal">{{object.title}}</h1>
+        <p>{{object.message}}.  </p>
+        <p> Дата создания: {{object.date_publication}}.  </p>
+        <p> Просмотры: {{object.count_view}}.  </p>
+        <a role="button"  class="w-100 btn btn-lg btn-outline-primary"  href="{% url 'mailing_update' object.pk %}" >Изменить</a>
+        <a role="button"  class="w-100 btn btn-lg btn-outline-primary"  href="{% url 'mailing_delete' object.pk %}" >Удалить</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

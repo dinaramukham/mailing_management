@@ -52,9 +52,9 @@ class LetterCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = 'mailing.add_letter'
     fields=['title','content']
     success_url = reverse_lazy('mailing_create')
-class ClientCreateView(LoginRequiredMixin, PermissionRequiredMixin,CreateView):
+class ClientCreateView(LoginRequiredMixin,  CreateView): #PermissionRequiredMixin,
     model =Client
-    permission_required = 'mailing.add_client'
+    #permission_required = 'mailing.add_client'
     #fields = ['name', 'email', 'message']
     form_class = ClientForm
     success_url = reverse_lazy('mailing_list')

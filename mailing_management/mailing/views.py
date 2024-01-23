@@ -26,11 +26,7 @@ class MailingUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
     #fields=['client', 'log', 'letter', 'date_from', 'date_to', 'period', 'status']
     form_class = MailingForm
     success_url = reverse_lazy('mailing_list')
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        if self.object.user != self.request.user:
-            raise Http404
-        return self.object
+
 class MailingCreateView(LoginRequiredMixin, CreateView):
     model=Mailing
     form_class = MailingForm
@@ -54,7 +50,7 @@ class LetterCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('mailing_create')
 class ClientCreateView(LoginRequiredMixin,  CreateView): #PermissionRequiredMixin,
     model =Client
-    #permission_required = 'mailing.add_client'
+    permission_required = 'mailing.add_client'
     #fields = ['name', 'email', 'message']
     form_class = ClientForm
     success_url = reverse_lazy('mailing_list')
@@ -78,3 +74,8 @@ class ClientListView( ListView):
 class ClientDetailView(LoginRequiredMixin, PermissionRequiredMixin,DetailView):
     model=Client
     permission_required = 'mailing.view_letter'
+
+class ClientDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model=Client
+    permission_required = 'mailing.delete_client'
+    success_url = reverse_lazy('mailing_list')

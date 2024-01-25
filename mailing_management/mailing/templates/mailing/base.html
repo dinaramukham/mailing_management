@@ -182,9 +182,9 @@
 
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'registration' %}">Регистрация</a>
         {% if user.is_authenticated %}
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">Войти</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="login/logout/">Выйти</a>
         {% else %}
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'logout' %}">Выйти</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'login' %}">Войти</a>
         {% endif %}
       </nav>
     </div>
@@ -220,6 +220,13 @@
         <ul class="list-unstyled text-small">
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'mailing_list' %}">просмотр</a></li>
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'mailing_create' %}">создать</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Письма</h5>
+        <ul class="list-unstyled text-small">
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'letter_list' %}">просмотр</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'letter_create' %}">создать</a></li>
         </ul>
       </div>
     </div>

@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.urls import  reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import ClientForm, MailingForm
+from .forms import ClientForm, MailingForm, LetterForm
 from .models import Mailing, Letter, Client, Log
 from mailing_management import settings
 
@@ -43,11 +43,31 @@ class MailingDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
         if self.object.user != self.request.user:
             raise Http404
         return self.object
+
 class LetterCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model=Letter
     permission_required = 'mailing.add_letter'
-    fields=['title','content']
+    form_class = LetterForm
     success_url = reverse_lazy('mailing_create')
+
+class LetterListView( ListView):
+    model = Letter
+
+class LetterUpdateView(LoginRequiredMixin, PermissionRequiredMixin,UpdateView):
+    model=Letter
+    permission_required = 'mailing.change_letter'
+    form_class = LetterForm
+    success_url = reverse_lazy('mailing_list')
+
+class LetterDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'mailing.view_letter'
+    model= Letter
+
+class LetterDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model=Letter
+    permission_required = 'mailing.delete_letter'
+    success_url = reverse_lazy('mailing_list')
+
 class ClientCreateView(LoginRequiredMixin,  CreateView): #PermissionRequiredMixin,
     model =Client
     permission_required = 'mailing.add_client'
@@ -57,15 +77,10 @@ class ClientCreateView(LoginRequiredMixin,  CreateView): #PermissionRequiredMixi
 
 class ClientUpdateView(LoginRequiredMixin, PermissionRequiredMixin,UpdateView):
     model=Client
-    permission_required = 'mailing.change_letter'
+    permission_required = 'mailing.change_client'
     #fields=['name', 'email', 'message']
     form_class = ClientForm
     success_url = reverse_lazy('mailing_list')
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        if self.object.user != self.request.user:
-            raise Http404
-        return self.object
 
 
 class ClientListView( ListView):

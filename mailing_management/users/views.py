@@ -21,7 +21,7 @@ class RegisterView(CreateView):
         new_user=form.save()
         send_mail(
             subject= 'Поздравляем, вы зарегестрированы',
-            message= '',
+            message= 'Вы зарегистрированы',
             from_email = settings.EMAIL_HOST_USER,
             recipient_list = [new_user.email ]
 

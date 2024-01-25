@@ -13,7 +13,7 @@ class Mailing(models.Model):
     client = models.ManyToManyField('Client', related_name='mailing_client')
     log = models.OneToOneField("Log", on_delete=models.CASCADE, null=True, blank=True)
     letter = models.OneToOneField('Letter', on_delete=models.CASCADE)
-    #user = models.ForeignKey('User', on_delete=models.DO_NOTHING, blank=True, null=True)
+    #user = models.ForeignKey('User', on_delete=models.DO_NOTHING, blank=True, null=True, default= )
 
     date_from = models.DateField()
     date_to = models.DateField()

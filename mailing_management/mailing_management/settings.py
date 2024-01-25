@@ -138,7 +138,7 @@ MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRONJOBS=[
-    ('0 4 * * *', 'python manage.py send_mailings')  # 'mailing.cron.example'
+    ('* 20 * * *', 'django.core.management.send_mailings' '>>' )  # 'mailing.cron.example'
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

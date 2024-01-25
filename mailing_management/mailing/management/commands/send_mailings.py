@@ -5,6 +5,7 @@ from django.core.management import BaseCommand
 
 from mailing.models import Mailing
 from mailing_management import settings
+from mailing.models import Log
 
 
 class Command(BaseCommand):

@@ -1,7 +1,6 @@
 accessify==0.3.1
 asgiref==3.7.2
 asttokens==2.4.1
-beautifulsoup4==4.12.2
 bs4==0.0.1
 build==1.0.3
 CacheControl==0.13.1
@@ -24,10 +23,7 @@ fastjsonschema==2.18.1
 filelock==3.13.1
 flake8==6.1.0
 funcsigs==1.0.2
-fuzzywuzzy==0.18.0
 gcloud==0.18.3
-google-api-core==2.11.1
-google-api-python-client==2.98.0
 google-auth==2.23.0
 google-auth-httplib2==0.1.1
 googleapis-common-protos==1.60.0

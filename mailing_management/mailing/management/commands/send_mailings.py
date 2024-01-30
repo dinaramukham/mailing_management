@@ -30,7 +30,7 @@ class Command(BaseCommand):
             for mailing in mailings:
                 client_list = mailing.client.all()
                 email_list=[client.email for client in client_list ]
-                if mailing.period == "weekly":
+                if mailing.period == "daily":
                     if datetime.now().hour == 12:
                         send_mail(
                             subject=f'{mailing.letter.title}',
